@@ -1,2 +1,5 @@
 extra/
 __pycache__/
+models/__pycache__/
+.venv/
+venv/
