@@ -1,7 +1,7 @@
-\- Validation set
+\- Validation set? Cross-validation(K-Fold?)?
 \- Explore models/tuning
-    \- Scaling?
-    \- Bagging? possible using `BaggingClassifier` (ensembles are impractical for larger models like MLP)
+    \- Scaling
+    \- Iterations or scaling for Logistic
+    ~~\- Bagging? possible using `BaggingClassifier` (ensembles are impractical for larger models like MLP)~~
     \- Hyperparameters
-    \- Final Model? CNN?
-\- Cross-validation(K-Fold?)/Advanced metrics to compare models
+    \- Final Model? CNN? Decision Tree?
