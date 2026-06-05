@@ -2,7 +2,7 @@ Install Requirements–
 `pip install -r requirements.txt`
 
 Running–
-Preferred: Run `main.ipynb` notebook
+Preferred: Run `main.ipynb` notebook. Approx. Total runtime (three simple models) ~ 6min
 `python main.py` or `python -m main` produces the same results (but matplotlib will pause running code for its interactive graphs)
 
 
@@ -33,3 +33,6 @@ Stored in `helper.py` to simplify code. Refer to notebooks/code for implementati
 
 Seed-
 `seed.py` contains the fixed seed
+
+Backup Main-
+`backup_main.ipynb` is a copy main.ipynb for convenience
