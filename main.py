@@ -1,41 +1,12 @@
-import time
-from pathlib import Path
-
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
 from dataevaluator import DataEvaluator
-from modelevaluator import Evaluator
+from helper import run_model_evaluation
 from models.knn import KNN
 from models.mlp import MLP
 from models.logistic import LogReg
-
-def timefunc(func, *args, **kwargs):
-    start = time.time()
-    result = func(*args, **kwargs)
-    end = time.time()
-    return end - start, result
-
-def log_model_run(model_name, train_time, eval_time, evals_result):
-    er = evals_result
-    log_dir = Path("models/logs")
-    log_dir.mkdir(parents=True, exist_ok=True)
-    log_path = log_dir / f"{model_name.lower().replace(' ', '_')}.txt"
-    with log_path.open("w", encoding="utf-8") as handle:
-        handle.write(f"Model: {model_name}\n")
-        handle.write(f"Training Time: {train_time:.6f}\n")
-        handle.write(f"Evaluation Time: {eval_time:.6f}\n")
-        handle.write(f"Accuracy: {er.accuracy}\n")
-        handle.write(f"Precision: {er.precision}\n")
-        handle.write(f"Recall: {er.recall}\n")
-        handle.write(f"F1: {er.f1}\n")
-        handle.write(f"Confusion Matrix: {er.cm}\n")
-        handle.write(f"Class Probabilities: {er.class_probabilities}\n")
-        handle.write(f"OVR: {er.ovr}\n")
-        handle.write(f"OVO Best: {er.ovo_best}\n")
-        handle.write(f"OVO Worst: {er.ovo_worst}\n")
-        handle.write(f"Evals: {er!r}\n")
 
 data = DataEvaluator('dataset')
 X_train, y_train, X_test, y_test = data.get_data()
@@ -51,30 +22,23 @@ f = MLP()
 
 # Logistic Regression
 
-le = Evaluator(l, "Logistic Regression")
-ltime, _ = timefunc(le.classifier.fit, X_train, y_train)
+le, levals, ltime, letime = run_model_evaluation(l, "Logistic Regression", X_train, y_train, X_test, y_test, color="YlGnBu")
 print(f"Training time for Logistic Regression: {ltime:.2f} seconds")
-letime, levals = timefunc(le.evals, X_test, y_test, color="YlGnBu")
-log_model_run("Logistic Regression", ltime, letime, levals)
 
 
 
 # k-Nearest Neighbors
 
-ke = Evaluator(k, "kNN")
-kfit_time, _ = timefunc(ke.classifier.fit, X_train, y_train)
-k_eval_time, kevals = timefunc(ke.evals, X_test, y_test, color="magma")
+ke, kevals, kfit_time, k_eval_time = run_model_evaluation(k, "kNN", X_train, y_train, X_test, y_test, color="magma")
+print(f"Training time for kNN: {kfit_time:.2f} seconds")
 print(f"Evaluation time for kNN: {k_eval_time:.2f} seconds")
-log_model_run("kNN", kfit_time, k_eval_time, kevals)
 
 
 # FeedForward Neural Network
 
-fe = Evaluator(f, "MLP")
-ftime, _ = timefunc(fe.classifier.fit, X_train, y_train)
+fe, fevals, ftime, fetime = run_model_evaluation(f, "MLP", X_train, y_train, X_test, y_test, color="viridis")
 print(f"Training time for MLP: {ftime:.2f} seconds")
-fetime, fevals = timefunc(fe.evals, X_test, y_test, color="viridis")
-log_model_run("MLP", ftime, fetime, fevals)
+print(f"Evaluation time for MLP: {fetime:.2f} seconds")
 
 plt.plot(f.classifier.loss_curve_)
 plt.xlabel('Iterations')
