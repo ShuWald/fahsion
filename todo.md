@@ -1,4 +1,4 @@
-\- Validation set? Cross-validation(K-Fold?)?
+\- Cross-validation(K-Fold?)?
 \- Explore models/tuning
     \- Scaling
     \- Iterations or scaling for Logistic
