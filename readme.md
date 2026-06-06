@@ -9,8 +9,10 @@ Preferred: Run `main.ipynb` notebook. Approx. Total runtime (three simple models
 # What to Do
 Go to `models` directory to find/add your model, and configure how they work there
 Go to `main.ipynb` and look for "Model Initialization Logic Here" to change how you want to initialize your the model(s)
-The `model_trainer()` function helps train models, you can also refer to the later cells as a guide to training your models
-Finally plug your model into an `Evaluator` and run `eval()`
+Use `train_model()` helper function to train your model
+Use `evaluate_model()` helper function to evaluate your model
+You can also refer to the later cells as a guide to training your models
+If you're not using this helper function then manually plug your model into an `Evaluator` and run `eval()`
 
 ## Major Components
 
@@ -28,6 +30,8 @@ Evaluator–
 
 Helper Functions–
 Stored in `helper.py` to simplify code. Refer to notebooks/code for implementation examples
+`train_model` will train your model using model.fit(). Logs into `models/logs` and returns training time
+`evaluate_model` will evaluate your model. logs into `models/logs`. Returns an `Evaluator`, useful for evaluating the same model later. Also returns evaluation outputs and time
 
 ### Other
 
