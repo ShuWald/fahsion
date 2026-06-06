@@ -70,7 +70,10 @@ class Evaluator:
 # Ideally the optimal function to evaluate a model without recomputing predictions or other metrics
     def evals(self, X, y_true, color="viridis", nbest=3, nworst=5):
         y_pred = self.classifier.predict(X)
-        y_score = self.classifier.predict_proba(X)
+        if hasattr(self.classifier, "predict_proba"):
+            y_score = self.classifier.predict_proba(X)
+        else:
+            y_score = self.classifier.predict(X)
         acc, prec, rec, f1 = self.score(y_pred, y_true)
         cm = self.cm(y_pred, y_true, color=color)
         ovr = self.rocauc_allclass(y_score, y_true)
