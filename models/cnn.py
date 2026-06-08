@@ -1,6 +1,8 @@
 from tensorflow.keras import Sequential
-from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
+from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout #, BatchNormalization
+from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
 from scikeras.wrappers import KerasClassifier
+from tensorflow.keras.optimizers import Adam
 
 def build_cnn():
     model = Sequential([
@@ -12,23 +14,38 @@ def build_cnn():
 
         Flatten(),
         Dense(128, activation='relu'),
-        Dropout(0.5),
+        Dropout(0.4),
 
         Dense(10, activation='softmax')
     ])
 
     model.compile(
-        optimizer='adam',
+        optimizer=Adam(learning_rate=1e-3),
         loss='sparse_categorical_crossentropy',
         metrics=['accuracy']
     )
 
     return model
 
+
 def CNN():
+    early_stop = EarlyStopping(
+        monitor='val_accuracy',
+        patience=3,
+        restore_best_weights=True
+    )
+
+    lr_reduce = ReduceLROnPlateau(
+        monitor='val_loss',
+        factor=0.5,
+        patience=2,
+        min_lr=1e-5
+    )
+
     return KerasClassifier(
-    model=build_cnn,
-    epochs=25,
-    batch_size=32,
-    verbose=1,
-)
+        model=build_cnn,
+        epochs=30,
+        batch_size=128,
+        verbose=1,
+        callbacks=[early_stop, lr_reduce]
+    )
