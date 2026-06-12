@@ -1,6 +1,5 @@
 from tensorflow.keras import Sequential
-from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout #, BatchNormalization
-from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
+from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
 from scikeras.wrappers import KerasClassifier
 from tensorflow.keras.optimizers import Adam
 
@@ -29,23 +28,9 @@ def build_cnn():
 
 
 def CNN():
-    early_stop = EarlyStopping(
-        monitor='val_accuracy',
-        patience=3,
-        restore_best_weights=True
-    )
-
-    lr_reduce = ReduceLROnPlateau(
-        monitor='val_loss',
-        factor=0.5,
-        patience=2,
-        min_lr=1e-5
-    )
-
     return KerasClassifier(
         model=build_cnn,
         epochs=30,
         batch_size=128,
         verbose=1,
-        callbacks=[early_stop, lr_reduce]
     )
