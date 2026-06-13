@@ -3,7 +3,7 @@ from seed import seed
 from sklearn.neural_network import MLPClassifier
 
 class MLP:
-    def __init__(self, hidden=(100,), lr=1e-3, max_iter=200, batch_size=200, alpha=1e-4, activation='relu'):
+    def __init__(self, hidden=(100, 100), lr=1e-3, max_iter=200, batch_size=128, alpha=1e-4, activation='relu'):
         self.classifier = MLPClassifier(
             hidden_layer_sizes=hidden, 
             learning_rate_init=lr,
