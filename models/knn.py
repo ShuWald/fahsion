@@ -13,4 +13,3 @@ class KNN:
     
     def predict(self, X):
         return self.classifier.predict(X)
-

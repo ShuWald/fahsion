@@ -36,9 +36,9 @@ def log_model_run(model_name, stage, **payload):
 
 
 def train_model(model, model_name, X_train, y_train):
-    train_time, _ = timefunc(model.fit, X_train, y_train)
+    train_time, history = timefunc(model.fit, X_train, y_train)
     log_model_run(model_name, "train", train_time=train_time)
-    return train_time
+    return train_time, history
 
 
 def evaluate_model(model, model_name, X, y, stage, color="viridis", nbest=3, nworst=5):
