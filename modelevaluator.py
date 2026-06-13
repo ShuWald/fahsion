@@ -81,8 +81,8 @@ class Evaluator:
         acc, prec, rec, f1 = self.score(y_pred, y_true)
         cm = self.cm(y_pred, y_true, color=color)
         ovr = self.rocauc_allclass(y_score, y_true)
-        ovo_best = self.rocauc_worstn(y_score, y_true, y_pred, n=nbest, worst=False)
-        ovo_worst = self.rocauc_worstn(y_score, y_true, y_pred, n=nworst, worst=True)
+        ovo_best = self.rocauc_worstn(y_score, y_true, y_pred, n=nbest, worst=False) if nbest > 0 else []
+        ovo_worst = self.rocauc_worstn(y_score, y_true, y_pred, n=nworst, worst=True) if nworst > 0 else []
         return Evals(cm, y_score, y_pred, acc, prec, rec, f1, ovr, ovo_best, ovo_worst)
 
 # for each class, run roc/auc against all other classes
