@@ -10,9 +10,11 @@ Preferred: Run `main.ipynb` notebook. Approx. Total runtime (three simple models
 Go to `models` directory to find/add your model, and configure how they work there
 Go to `main.ipynb` and look for "Model Initialization Logic Here" to change how you want to initialize your the model(s)
 Use `train_model()` helper function to train your model
+Within the notebooks, you can comment out or delete cells with other other models' training-validation(not testing) loops for your own. You can also always use `backup_main.ipynb` as well for convenience. 
 Use `evaluate_model()` helper function to evaluate your model
 You can also refer to the later cells as a guide to training your models
 If you're not using this helper function then manually plug your model into an `Evaluator` and run `eval()`
+Test your final model at the end against the other models, under the "Final Testing and Evaluations" header
 
 ## Major Components
 
