@@ -4,5 +4,7 @@
 from .knn import KNN
 from .logistic import LogReg
 from .mlp import MLP
+from .cnn import CNN
+from .random_forest import RandomForest
 
-__all__ = ["KNN", "LogReg", "MLP"]
+__all__ = ["KNN", "LogReg", "MLP", "CNN", "RandomForest"]
