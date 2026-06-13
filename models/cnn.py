@@ -27,10 +27,10 @@ def build_cnn():
     return model
 
 
-def CNN():
+def CNN(ep, batch):
     return KerasClassifier(
         model=build_cnn,
-        epochs=30,
-        batch_size=128,
+        epochs=ep,
+        batch_size=batch,
         verbose=1,
     )

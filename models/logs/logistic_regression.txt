@@ -1,10 +1,10 @@
 Model: Logistic Regression
 Stage: train
-train_time: 89.08479738235474
+train_time: 87.5041835308075
 
 Model: Logistic Regression
 Stage: validation
-eval_time: 1.239428997039795
+eval_time: 1.2355971336364746
 evals.accuracy: 0.8402222222222222
 evals.precision: 0.8388563240447852
 evals.recall: 0.8402222222222222
@@ -38,7 +38,7 @@ evals.ovo_worst: [(np.uint8(0), np.uint8(6), 0.8337504133722153), (np.uint8(2), 
 
 Model: Logistic Regression
 Stage: test
-eval_time: 1.5092744827270508
+eval_time: 1.5359690189361572
 evals.accuracy: 0.8328
 evals.precision: 0.8310580588485158
 evals.recall: 0.8328

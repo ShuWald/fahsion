@@ -1,10 +1,10 @@
 Model: MLP
 Stage: train
-train_time: 141.06509280204773
+train_time: 72.16475415229797
 
 Model: MLP
 Stage: validation
-eval_time: 1.5531349182128906
+eval_time: 1.511441707611084
 evals.accuracy: 0.8858888888888888
 evals.precision: 0.8856911759408207
 evals.recall: 0.8858888888888888
@@ -38,7 +38,7 @@ evals.ovo_worst: [(np.uint8(0), np.uint8(6), 0.906699936866789), (np.uint8(2), n
 
 Model: MLP
 Stage: test
-eval_time: 1.2094614505767822
+eval_time: 1.256880283355713
 evals.accuracy: 0.8816
 evals.precision: 0.8812609280997827
 evals.recall: 0.8816
