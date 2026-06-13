@@ -1,7 +1,7 @@
 from tensorflow.keras import Sequential
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
-from scikeras.wrappers import KerasClassifier
 from tensorflow.keras.optimizers import Adam
+from scikeras.wrappers import KerasClassifier
 
 def build_cnn():
     model = Sequential([
