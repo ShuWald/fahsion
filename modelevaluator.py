@@ -46,8 +46,8 @@ class Evaluator:
         values = [(self.confusion_matrix[i, j], self.confusion_matrix[j, i]) for i, j in pairs]
         labels = [f"{classes[i]} vs {classes[j]}" for i, j in pairs]
         x = np.arange(len(pairs))
-        width = 0.35
-        fig, ax = plt.subplots(figsize=(max(14, len(pairs) * 0.55), 6))
+        width = 0.45
+        fig, ax = plt.subplots(figsize=(10, 6))
         ax.bar(x - width / 2, [pair[0] for pair in values], width, label='a as b')
         ax.bar(x + width / 2, [pair[1] for pair in values], width, label='b as a')
         ax.set_xticks(x)
