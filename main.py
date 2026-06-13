@@ -7,6 +7,7 @@ from helper import evaluate_model, train_model
 from models.knn import KNN
 from models.mlp import MLP
 from models.logistic import LogReg
+from models.random_forest import RandomForest
 
 
 data = DataEvaluator('dataset')
@@ -18,6 +19,7 @@ clothing_types = data.clothing_types
 l = LogReg()
 k = KNN()
 f = MLP()
+r = RandomForest()
 
 # Train models
 ltime = train_model(l, 'Logistic Regression', X_train, y_train)
@@ -26,6 +28,8 @@ kfit_time = train_model(k, 'kNN', X_train, y_train)
 print(f'Training time for kNN: {kfit_time:.2f} seconds')
 ftime = train_model(f, 'MLP', X_train, y_train)
 print(f'Training time for MLP: {ftime:.2f} seconds')
+rtime = train_model(r, 'Random Forest', X_train, y_train)
+print(f'Training time for Random Forest: {rtime:.2f} seconds')
 
 # Validate models
 le, levals, letime = evaluate_model(l, 'Logistic Regression', X_val, y_val, stage='validation', color='YlGnBu')
@@ -34,6 +38,8 @@ ke, kevals, k_eval_time = evaluate_model(k, 'kNN', X_val, y_val, stage='validati
 print(f'Validation time for kNN: {k_eval_time:.2f} seconds')
 fe, fevals, fetime = evaluate_model(f, 'MLP', X_val, y_val, stage='validation', color='viridis')
 print(f'Validation time for MLP: {fetime:.2f} seconds')
+re, revals, retime = evaluate_model(r, 'Random Forest', X_val, y_val, stage='validation', color='plasma')
+print(f'Validation time for Random Forest: {retime:.2f} seconds')
 
 
 plt.plot(f.classifier.loss_curve_)
@@ -50,6 +56,8 @@ print('kNN Confusion Evals:')
 print(kevals)
 print('MLP Confusion Evals:')
 print(fevals)
+print('Random Forest Confusion Evals:')
+print(revals)
 print('\n\n')
 
 
@@ -60,15 +68,16 @@ ke_test, ke_test_vals, ke_test_time = evaluate_model(k, 'kNN', X_test, y_test, s
 print(f'Test time for kNN: {ke_test_time:.2f} seconds')
 fe_test, fe_test_vals, fe_test_time = evaluate_model(f, 'MLP', X_test, y_test, stage='test', color='viridis')
 print(f'Test time for MLP: {fe_test_time:.2f} seconds')
+re_test, re_test_vals, re_test_time = evaluate_model(r, 'Random Forest', X_test, y_test, stage='test', color='plasma')
+print(f'Test time for Random Forest: {re_test_time:.2f} seconds')
 
 # Compare all models across categories
-
-models = ["Logistic Regression", "kNN", "MLP"]
-catcounts = {"Logistic Regression": np.diag(levals.cm) , "kNN": np.diag(kevals.cm) , "MLP": np.diag(fevals.cm)}
+models = ["Logistic Regression", "kNN", "MLP", "Random Forest"]
+catcounts = {"Logistic Regression": np.diag(levals.cm) , "kNN": np.diag(kevals.cm) , "MLP": np.diag(fevals.cm), "Random Forest": np.diag(revals.cm)}
 cataccs = {model: counts/(len(y_test)/len(clothing_types)) for model, counts in catcounts.items()}
 
 x = np.arange(len(clothing_types))
-width = 0.275
+width = 0.2
 [plt.bar(x - width + i*width, catcounts[model], width, label=model) for i, model in enumerate(models)]
 plt.xlabel('Clothing Category')
 plt.ylabel('Number of Correct Predictions')
@@ -80,7 +89,7 @@ plt.savefig('figures/model_category_accuracies.png')
 plt.show()
 [print(f'{model} Category Accuracy: {cataccs[model]}') for model in models]
 totaccs = {model: np.round(np.mean(cataccs[model]), 4) for model in models}
-print('Sorted by Overall Accuracy:', sorted([{'Logistic Regression': totaccs['Logistic Regression']}, {'kNN': totaccs['kNN']}, {'MLP': totaccs['MLP']}], key=lambda x: list(x.values())[0], reverse=True))
+print('Sorted by Overall Accuracy:', sorted([{'Logistic Regression': totaccs['Logistic Regression']}, {'kNN': totaccs['kNN']}, {'MLP': totaccs['MLP']}, {'Random Forest': totaccs['Random Forest']}], key=lambda x: list(x.values())[0], reverse=True))
 
 performance_by_category = pd.DataFrame({model: cataccs[model] for model in models}, index=[data.clothing_types[i] for i in data.clothing_types.keys()])
 print('Performance by Category:', performance_by_category, sep='\n')
