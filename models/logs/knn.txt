@@ -1,10 +1,10 @@
 Model: kNN
 Stage: train
-train_time: 0.0750572681427002
+train_time: 0.03963661193847656
 
 Model: kNN
 Stage: validation
-eval_time: 23.56515073776245
+eval_time: 17.435173511505127
 evals.accuracy: 0.8502222222222222
 evals.precision: 0.8532788767742758
 evals.recall: 0.8502222222222222
@@ -32,7 +32,7 @@ evals.ovo_worst: [(np.uint8(0), np.uint8(6), 0.8178023629859001), (np.uint8(2), 
 
 Model: kNN
 Stage: test
-eval_time: 413.22491550445557
+eval_time: 20.044857025146484
 evals.accuracy: 0.848
 evals.precision: 0.8511550621961887
 evals.recall: 0.848

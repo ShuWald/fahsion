@@ -1,10 +1,10 @@
 Model: Random Forest
 Stage: train
-train_time: 12.767741441726685
+train_time: 16.148749589920044
 
 Model: Random Forest
 Stage: validation
-eval_time: 2.8662586212158203
+eval_time: 2.755891799926758
 evals.accuracy: 0.8811111111111111
 evals.precision: 0.8803659371337844
 evals.recall: 0.8811111111111111
@@ -32,7 +32,7 @@ evals.ovo_worst: [(np.uint8(0), np.uint8(6), 0.8777458437302708), (np.uint8(2), 
 
 Model: Random Forest
 Stage: test
-eval_time: 2.642493486404419
+eval_time: 3.1928930282592773
 evals.accuracy: 0.8745
 evals.precision: 0.8735597747945514
 evals.recall: 0.8745
